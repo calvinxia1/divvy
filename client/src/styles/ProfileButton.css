@@ -1,0 +1,27 @@
+.profile-button {
+    width: 50px; /* Set the width of the button */
+    height: 50px; /* Set the height of the button */
+    background-color: transparent; /* Make the button background transparent */
+    border: none; /* Remove the button border */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    overflow: hidden; /* Ensure the image doesn't exceed button boundaries */
+    position: relative; /* Position the image relative to the button */
+    border-radius: 100%;
+    transition: transform 0.2s ease-in-out
+
+  }
+  
+  .profile-pic {
+    width: 100%; /* Make the image width 100% of the button */
+    height: 100%; /* Make the image height 100% of the button */
+    object-fit: cover; /* Scale the image to cover the entire button */
+    position: absolute; /* Position the image absolutely within the button */
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+  }
+  .profile-button:hover {
+    transform: scale(1.1);
+  }
+
+  
