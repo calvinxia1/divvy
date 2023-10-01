@@ -3,10 +3,9 @@ from flask_pymongo import PyMongo
 from pymongo.mongo_client import MongoClient
 
 app = Flask(__name__)
-uri = "mongodb+srv://calvinxia1:testingpassword@cluster0.il9n2dl.mongodb.net/?retryWrites=true&w=majority"
-app.config['MONGO_URI'] = "mongodb+srv://calvinxia1:testingpassword@cluster0.il9n2dl.mongodb.net/test?retryWrites=true&w=majority"
-client = PyMongo(app)
-db = client.db
+uri = "mongodb+srv://calvinxia1:whatsyoureta@cluster0.il9n2dl.mongodb.net/?retryWrites=true&w=majority"
+client = MongoClient(uri)
+db = client.get_database("divvy")
 
 try:
     client.admin.command('ping')

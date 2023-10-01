@@ -1,14 +1,15 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import Logo from "./Logo";
 import "./App.css";
 interface Data {
   name: string;
-  about: string;
+  age: number;
+  aliases: string[];  
 }
 function App() {
-  const [data, setData] = useState<Data>({ name: "", about: "" });
-
+  const [data, setData] = useState<Data>({ name: "", age: 0, aliases: [""] });
+  //const host = "http://127.0.0.1:5000"
   useEffect(() => {
     fetch("/profile")
       .then((response) => response.json())
@@ -18,11 +19,12 @@ function App() {
 
   return (
     <div className="div">
-      {data.name && data.about ? (
+      {data.name && data.age && data.aliases ? (
         <div>
           <h1>Data from Flask</h1>
           <p>Name: {data.name}</p>
-          <p>About: {data.about}</p>
+          <p>Age: {data.age}</p>
+          <p>But you can call him: {data.aliases.join(", ")}</p>
         </div>
       ) : (
         <p>Loading...</p>
