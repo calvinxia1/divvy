@@ -1,10 +1,10 @@
 from api import app, db
 from flask import Flask, jsonify
 
-
+@app.route('/')
 @app.route('/profile', methods=['GET'])
 def myprofile():
-    profile = db.profiles.find_one({"age": 22})
+    profile = db.profiles.find_one({"name": "Alvin"})
     print(profile)
     
     if profile:
@@ -20,6 +20,7 @@ def getprofile(username):
         profile = db.profiles.find_one({"username": username})
         if profile:
             # Serialize the profile to JSON and return it
+            profile['_id'] = str(profile['_id'])
             return jsonify(profile)
         else:
             return jsonify({"error": "Profile not found"}), 404

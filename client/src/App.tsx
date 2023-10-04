@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import Logo from "./Logo";
-import Profile from "../components/Profile";
+import Profile from "./components/Profile";
 import "./App.css";
 function App() {
+  const username = "rryang"
 
   return (
     <div className="div">
@@ -17,7 +18,7 @@ function App() {
         </div>
       </div>
       <div className="body-container">
-        <Profile/>
+        <Profile username={username}/>
         <div className="sidebar-container"></div>
         <div className="feed-container"></div>
       </div>

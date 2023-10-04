@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+interface Props {
+  username:string;
+}
 interface ProfileInfo {
   id: number;
   username: string;
@@ -6,7 +9,7 @@ interface ProfileInfo {
   age: number;
   aliases: string[];
 }
-const Profile = () => {
+const Profile = ({username}: Props) => {
   const [data, setData] = useState<ProfileInfo>({
     id: 0,
     username: "",
@@ -14,9 +17,8 @@ const Profile = () => {
     age: 0,
     aliases: [""],
   });
-  const username = "rryang"
   useEffect(() => {
-    fetch(`/profiles/${username}`) // Use the correct URL path
+    fetch(`/profile/${username}`) // Use the correct URL path
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -28,9 +30,10 @@ const Profile = () => {
         console.error("Error fetching data: ", error);
         // Handle the error here, e.g., display an error message to the user
       });
-  }, []);
+  }, [username]);
   return (
     <div>
+
       <h1>{data.username}'s Profile</h1>
       <p>Name: {data.name}</p>
       <p>Age: {data.age}</p>
