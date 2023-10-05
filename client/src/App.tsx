@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import Profile from "./components/Profile";
 import "./App.css";
 function App() {
-  const username = "rryang"
+  const username = "ihavenoidea"
 
   return (
     <div className="div">

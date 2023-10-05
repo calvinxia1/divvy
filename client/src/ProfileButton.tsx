@@ -5,13 +5,9 @@ import dara from "./img/dara.jpg"
 const ProfileButton = () => {
   return (
     <div>
-      <div className="dropdown">
+      <div>
         <button
-          className="profile-button"
-          type="button"
-          id="book-dropdown"
-          data-bs-toggle="dropdown"
-
+          className="profile-button"          
         >
         <img src= {dara} alt="Profile Pic" className="profile-pic"/>
         </button>

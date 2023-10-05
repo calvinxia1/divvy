@@ -18,14 +18,9 @@ const Profile = ({username}: Props) => {
     aliases: [""],
   });
   useEffect(() => {
-    fetch(`/profile/${username}`) // Use the correct URL path
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((profileData) => setData(profileData))
+    fetch(`/profile/${username}`) // Use the correct URL path use back tick when using variables in path
+      .then((response) => response.json())
+      .then((data) => setData(data))
       .catch((error) => {
         console.error("Error fetching data: ", error);
         // Handle the error here, e.g., display an error message to the user
@@ -33,9 +28,8 @@ const Profile = ({username}: Props) => {
   }, [username]);
   return (
     <div>
-
-      <h1>{data.username}'s Profile</h1>
-      <p>Name: {data.name}</p>
+      <h1>{data.name}'s Profile</h1>
+      <p>Username: {data.username}</p>
       <p>Age: {data.age}</p>
       <p>Aliases: {data.aliases.join(", ")}</p>
     </div>
