@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 interface Props {
-  username:string;
+  id:number;
 }
 interface ProfileInfo {
   id: number;
@@ -9,7 +9,7 @@ interface ProfileInfo {
   age: number;
   aliases: string[];
 }
-const Profile = ({username}: Props) => {
+const Profile = ({id}: Props) => {
   const [data, setData] = useState<ProfileInfo>({
     id: 0,
     username: "",
@@ -18,14 +18,14 @@ const Profile = ({username}: Props) => {
     aliases: [""],
   });
   useEffect(() => {
-    fetch(`/profile/${username}`) // Use the correct URL path use back tick when using variables in path
+    fetch(`/profile/${id}`) // Use the correct URL path use back tick when using variables in path
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
         console.error("Error fetching data: ", error);
         // Handle the error here, e.g., display an error message to the user
       });
-  }, [username]);
+  }, [id]);
   return (
     <div>
       <h1>{data.name}'s Profile</h1>

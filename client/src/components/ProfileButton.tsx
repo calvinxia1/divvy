@@ -1,6 +1,6 @@
 import React from "react";
-import "./styles/ProfileButton.css"
-import dara from "./img/dara.jpg"
+import "../styles/ProfileButton.css"
+import dara from "../img/dara.jpg"
 
 const ProfileButton = () => {
   return (
