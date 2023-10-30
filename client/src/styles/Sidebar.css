@@ -1,0 +1,38 @@
+/* Sidebar Container */
+.sidebar {
+  width: 100%;
+  background-color: #588157;
+  color: #fff;
+  padding: 10px;
+  transition: width 0.3s; /* Add a transition effect to the width */
+}
+
+/* Sidebar List */
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* Sidebar List Item */
+.sidebar-list-item {
+  margin-left: 10px;
+  padding:10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover Effect for Sidebar List Items */
+.sidebar-list-item:hover {
+  background-color: #4D6859; /* Background color on hover */
+}
+
+/* Selected Sidebar List Item */
+.sidebar-list-select {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #344E41;
+  transition: background-color 0.3s;
+  
+}

@@ -11,13 +11,11 @@
     padding: 10px;
     border-bottom: 1px solid #ccc;
     cursor: pointer;
+    background-color: #DAD7CD;
     transition: background-color 0.3s, color 0.3s;
   }
 
-  .list-group-item-profile {
+  .list-group-item-profile:hover{
     background-color: #3a5a40;
     color: #fff;
-  }
-  .list-group-item-feed {
-    
   }

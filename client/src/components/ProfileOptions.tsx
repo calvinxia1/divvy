@@ -1,20 +1,19 @@
   import { Fragment, useState } from "react";
-  import "../styles/ListGroup.css"
+  import "../styles/ProfileOptions.css"
   interface Props {
       items: string[];
-      listItemType?: "list-group-item-profile"|"list-group-item-feed";
       clickSelectItem: (item: string) => void;
   }
 
-  function ListGroup({items, listItemType, clickSelectItem}: Props ) {
+  function ProfileOptions({items, clickSelectItem}: Props ) {
 
     
     return (
-      <div className="list-group-container">
+      <div className=''>
         {items.length === 0 && <p> No items in list</p>}
         <ul className="list-group">
           {items.map((item) => (
-            <li className = {listItemType}
+            <li className = "list-group-item-profile"
               key={item}
               onClick={() => {
                   clickSelectItem(item);
@@ -27,4 +26,4 @@
     );
   }
 
-  export default ListGroup;
+  export default ProfileOptions;

@@ -1,8 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
+import '../styles/Sidebar.css'
+interface Props {
+  pages: string[];
+  onSelectItem: (page:string) => void;
+}
+const Sidebar = ({pages,onSelectItem}: Props) => {
+  const [active, setActive] = useState(-1);
 
-const Sidebar = () => {
   return (
-    <div>Sidebar</div>
+  
+    
+    <div className='sidebar'>
+      {pages.length === 0 && <p> No items in list</p>}
+      <ul className='sidebar-list'>
+        {pages.map((page,index) => (
+          <li className= {active === index? 'sidebar-list-select': 'sidebar-list-item'} 
+          key={page}
+          onClick={()=> setActive(index)}
+          >
+          {page}
+
+          </li>
+        ))
+        }
+
+      </ul>
+    </div>
   )
 }
 
