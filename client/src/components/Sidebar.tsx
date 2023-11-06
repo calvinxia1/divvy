@@ -16,7 +16,11 @@ const Sidebar = ({pages,onSelectItem}: Props) => {
         {pages.map((page,index) => (
           <li className= {active === index? 'sidebar-list-select': 'sidebar-list-item'} 
           key={page}
-          onClick={()=> setActive(index)}
+          onClick={()=> {
+            setActive(index);
+            onSelectItem(page);
+          
+          }}
           >
           {page}
 

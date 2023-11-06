@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 interface Props {
-  id:number;
+  id: number;
 }
 interface ProfileInfo {
   id: number;

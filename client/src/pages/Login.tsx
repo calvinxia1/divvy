@@ -1,12 +1,16 @@
 import React, { useState, FormEvent } from 'react';
-
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
-
+import {useUser} from "../context/UserContextProvider";
 
 const Login = () => {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const {setUserId} = useUser();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(0);
 
+
+  const navigate = useNavigate();
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
     const data = {
@@ -22,16 +26,33 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       });
-  
-      if (response.ok) {
+      
+      if (response.status == 200) {
         // Request was successful, you can handle the response here
         // For example, you can redirect the user to another page or show a success message
         // You might also want to clear the username and password fields if needed
+        const responseData = await response.json()
+        setUserId(responseData.userId);
         setUsername('');
         setPassword('');
-      } else {
-        // Handle errors, e.g., show an error message to the user
-        console.error('POST request failed');
+        setError(0);
+        navigate('/homepage');
+        
+      } else if (response.status == 401){
+        //Username found but password incorrect
+        setUsername('');
+        setPassword('');
+        setError(1);
+        console.log('Incorrect password');
+
+      
+      
+      }else {
+        //Username not found
+        setUsername('');
+        setPassword('');
+        setError(2);
+        console.error('User not found');
       }
     } catch (error) {
       // Handle network errors, e.g., no internet connection
@@ -40,32 +61,33 @@ const Login = () => {
   }
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
+      <div className="login-wrapper">
+        {(error == 1 || error == 2) &&<h1> You dun fucked up</h1>}
+        <h1>Please Log In</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <p>Username</p>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <p>Password</p>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
   );
 } 
 

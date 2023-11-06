@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
-interface Props {
-  
-}
+
 const Feed = () => {
-    const [page, setPage] = useState(-1)
-    const feeds = []
+  
     
   return (
-    <div></div>
-  )
-}
+    <div className='feed'>
+      
+      <div className='feed-list'>
+        
+      </div>
 
-export default Feed
+    </div>
+  )
+};
+
+export default Feed;

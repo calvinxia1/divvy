@@ -3,9 +3,12 @@ import ProfileButton from "../components/ProfileButton";
 import Logo from "../components/Logo";
 import '../styles/HomePage.css';
 import Sidebar from '../components/Sidebar';
+import {useUser} from "../context/UserContextProvider";
+
 const HomePage = () => {
-    const id = 0;
-    const pages = ["Events", "Transactions", "Notifications"]
+    const {userId} = useUser();
+    
+    const pages = ["Events", "Transactions", "Notifications"];
 
     const [feed, setFeed] = useState(0);
 
@@ -28,7 +31,7 @@ const HomePage = () => {
           <div className="sidebar-container">
             <Sidebar pages = {pages} onSelectItem={() => setFeed(1)}></Sidebar>
           </div>
-          <div className="feed-container"></div>
+          <div className="feed-container"> {userId && <p>Your User ID: {userId}</p>}</div>
         </div>
         
       </div>

@@ -25,6 +25,7 @@
     display: flex;
     flex-direction: row;
     height: 85vh;
+    width: 90vw;
 
 }
 .sidebar-container{
@@ -40,6 +41,10 @@
 }
 
 .feed-container {
+    margin-top: 10vh;
+    margin-left:2vh;
+    background-color: #DAD7CD;
+    
     position: relative;
     display: flex;
     overflow-y: hidden;
