@@ -7,7 +7,7 @@ def myprofile():
     if request.method == 'POST':
         data = request.get_json()
         username = data.get('username')
-        password = data.form.get('password')
+        password = data.get('password')
 
 
         if username and password:
@@ -15,8 +15,8 @@ def myprofile():
 
             if user:
                 if user['password'] == password:
-                    user.pop('_id', None)
-                    return jsonify(user)
+
+                    return jsonify({"userId": user['id']}), 200
                 else:
                     return jsonify({'message': 'Incorrect password'}), 401
             else:
@@ -35,13 +35,13 @@ def myprofile():
         else:
             # If no profile is found, return a 404 response
             return "Profile not found", 404
-@app.route('/profile/<username>',methods = ['GET'])
-def getprofile(username):
+@app.route('/profile/<id>',methods = ['GET'])
+def getprofile(id):
     try:
-        profile = db.profiles.find_one({"username": username})
+        profile = db.profiles.find_one({"userId": id})
+        profile.pop('_id', None)
         if profile:
             # Serialize the profile to JSON and return it
-            profile['_id'] = str(profile['_id'])
             return jsonify(profile)
         else:
             return jsonify({"error": "Profile not found"}), 404
