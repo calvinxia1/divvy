@@ -37,11 +37,13 @@ const ProfileButton = () => {
         >
         <img src= {dara} alt="Profile Pic" className="profile-pic"/>
         </button>
+        <div className="list-group-container">
         {list && (
-          <div className="list-group-container">
+          
             <ProfileOptions items={profile_options} clickSelectItem={goToTheThing}/>
-          </div>
+          
         )}
+        </div>
       </div>
     </div>
   );

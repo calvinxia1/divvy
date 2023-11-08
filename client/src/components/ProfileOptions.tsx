@@ -9,7 +9,7 @@
 
     
     return (
-      <div className=''>
+      <>
         {items.length === 0 && <p> No items in list</p>}
         <ul className="list-group">
           {items.map((item) => (
@@ -22,7 +22,7 @@
             </li>
           ))}
         </ul>
-      </div>
+      </>
     );
   }
 

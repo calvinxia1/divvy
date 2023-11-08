@@ -2,18 +2,21 @@ import React,{useState, useEffect} from 'react'
 interface DivyProps {
   id: number;
   name: string;
-  payer: number;
+  description: string,
   participants: number[];
+  expenses: number[]
   amount: number;
 
 }
+
 const Divy = () => {
   const [userId, setUserId] = useState("");
   const [data,setData] = useState<DivyProps>({
     id: 0,
     name: "",
-    payer: 0,
+    description:"",
     participants: [],
+    expenses: [],
     amount: 0,
   });
   useEffect(() => {

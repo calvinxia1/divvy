@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/Logo.css"
-import stressnet from "../img/stressnet.png"
+import stressnet from "../img/stressvision.png"
 
 
 
