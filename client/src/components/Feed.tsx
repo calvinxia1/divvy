@@ -2,11 +2,20 @@ import React, {useState,useEffect} from 'react'
 interface Props {
   userId: number;
 }
-
+interface DivyProps {
+  id: number;
+  name: string;
+  description: string
+}
 const Feed = ({userId}: Props) => {
-  const [data, setData] = useState()
+  const [data,setData] = useState<DivyProps>({
+    id: 0,
+    name: "",
+    description:""
+  });
+  const[feed, setFeed] = useState(0);
   useEffect(() => {
-    fetch(`/profile/${userId}`) // Use the correct URL path use back tick when using variables in path
+    fetch(`/divys/${userId}`) // Use the correct URL path use back tick when using variables in path
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -16,10 +25,10 @@ const Feed = ({userId}: Props) => {
   }, [userId]);
   return (
     <div className='feed'>
-      
-      <div className='feed-list'>
+      {feed == 0 &&
+      <div className='divy-list'>
         
-      </div>
+      </div>}
 
     </div>
   )

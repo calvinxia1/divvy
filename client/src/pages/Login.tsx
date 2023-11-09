@@ -27,7 +27,7 @@ const Login = () => {
         body: JSON.stringify(data),
       });
       
-      if (response.status == 200) {
+      if (response.status === 200) {
         // Request was successful, you can handle the response here
         // For example, you can redirect the user to another page or show a success message
         // You might also want to clear the username and password fields if needed
@@ -36,9 +36,9 @@ const Login = () => {
         setUsername('');
         setPassword('');
         setError(0);
-        navigate('/homepage');
+        navigate('/homepage/divys');
         
-      } else if (response.status == 401){
+      } else if (response.status === 401){
         //Username found but password incorrect
         setUsername('');
         setPassword('');
@@ -62,7 +62,7 @@ const Login = () => {
 
   return (
       <div className="login-wrapper">
-        {(error == 1 || error == 2) &&<h1> You dun fucked up</h1>}
+        {(error === 1 || error === 2) &&<h1> You dun fucked up</h1>}
         <h1>Please Log In</h1>
         <form onSubmit={handleSubmit}>
           <label>

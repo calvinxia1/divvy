@@ -1,25 +1,23 @@
-import React, {useState} from 'react'
+import React, {ReactNode} from 'react'
 import ProfileButton from "../components/ProfileButton";
 import Logo from "../components/Logo";
-import '../styles/HomePage.css';
+import '../layout-styles/HomeLayout.css';
 import Sidebar from '../components/Sidebar';
 import {useUser} from "../context/UserContextProvider";
-
-const HomePage = () => {
-    const {userId} = useUser();
-    
-    const pages = ["My Divys", "Transactions", "Notifications"];
-
-    const [feed, setFeed] = useState(0);
-
-    return (
-      <div className="div">
+interface Props {
+  children: ReactNode;
+}
+const HomeLayout = ({children}: Props) => {
+  const {userId} = useUser();  
+  const pages = ["My Divys", "Transactions", "Friend Requests"];
+  return (
+    <div className="div">
         <div className = "left-container">
           <div className="logo-container">
               <Logo />
           </div>
           <div className="sidebar-container">
-            <Sidebar pages = {pages} onSelectItem={() => setFeed(1)}></Sidebar>
+            <Sidebar pages = {pages} onSelectItem={() => console.log(pages)}></Sidebar>
           </div>
         </div>
         <div className='body-container'>
@@ -29,19 +27,22 @@ const HomePage = () => {
               
             </div>
           </div>
-          <div className="feed-container"> {userId && <p>Your User ID: {userId}</p>}</div>
+          <div className="feed-container"> 
+            {userId && <p>Your User ID: {userId}</p>}
+            {children}
+          </div>
             
           
         </div>
         <div className='right-container'>
-            <div className="profile">
-              <ProfileButton />
-            </div>
+          <div className="profile">
+            <ProfileButton />
+          </div>
         </div>
         
         
       </div>
-    );
+  )
 }
 
-export default HomePage
+export default HomeLayout
