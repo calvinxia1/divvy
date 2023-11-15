@@ -29,6 +29,7 @@ const HomeLayout = ({children}: Props) => {
           </div>
           <div className="feed-container"> 
             {userId && <p>Your User ID: {userId}</p>}
+            
             {children}
           </div>
             

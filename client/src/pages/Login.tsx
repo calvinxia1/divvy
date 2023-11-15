@@ -19,7 +19,7 @@ const Login = () => {
     };
   
     try {
-      const response = await fetch('/profile', {
+      const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // You can adjust the content type as needed
@@ -31,7 +31,7 @@ const Login = () => {
         // Request was successful, you can handle the response here
         // For example, you can redirect the user to another page or show a success message
         // You might also want to clear the username and password fields if needed
-        const responseData = await response.json()
+        const responseData = await response.json();
         setUserId(responseData.userId);
         setUsername('');
         setPassword('');

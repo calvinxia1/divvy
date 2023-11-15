@@ -1,9 +1,27 @@
 from api import app, db
 from flask import Flask, jsonify, request
+@app.route('/divys/<divyId>', methods=['GET'])
+def getdivyinfo(divyId):
+    divyId = int(divyId)
+    if request.method == 'GET':
+            divy = db.divys.find_one({'did': divyId}, projection=['name','description', 'participants','expenses', 'total'])
+            if divy:
+                divy_info = {
+                    'name': divy['name'],
+                    'description': divy['description'],
+                    'participants': divy['participants'],
+                    'expenses': divy['expenses'],
+                    'total': divy['total']
+                }
+                return jsonify(divy_info)
+            
+            else:
+                return jsonify({'error': 'Divy not found'}), 404
 
-@app.route('/')
-@app.route('/divy/<int:id>', methods=['GET','POST'])
-def getdivy(id):
+
+@app.route('/<uid>/divys', methods=['GET','POST'])
+def getdivy(uid):
+    uid = int(uid)
     if request.method == 'POST':
         data = request.get_json()
         divyId = db.divys.count_documents({})
@@ -11,12 +29,12 @@ def getdivy(id):
         description =data.get('description')
         participants = data.get('participants',[])
         
-        participants.append(id)
+        participants.append(uid)
         total = 0
         expenses = []
         
         new_divy = {
-            'id': divyId,
+            'did': divyId,
             'name': name,
             'description': description,
             'participants': participants,
@@ -30,13 +48,13 @@ def getdivy(id):
         else:
             return jsonify({'message': 'Failed to create Divy'}, 500)
     if request.method == 'GET':
-            user_divys = list(db.divys.find({'participants': id}, projection=['id', 'name', 'description']))
-            my_divys = [{'id': divy['id'], 'name': divy['name'], 'description': divy['description']} for divy in user_divys]
+            user_divys = list(db.divys.find({'participants': uid}, projection=['did']))
+            my_divys = [divy['did'] for divy in user_divys]
 
             return jsonify(my_divys)
 
 
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def myprofile():
     if request.method == 'POST':
         data = request.get_json()
@@ -49,30 +67,18 @@ def myprofile():
 
             if user:
                 if user['password'] == password:
-
-                    return jsonify({"userId": user['id']}), 200
+                    return jsonify({"userId": user['uid']}), 200
                 else:
                     return jsonify({'message': 'Incorrect password'}), 401
             else:
                 return jsonify({'message': 'User not found'}), 404
         return jsonify({'message': 'Invalid request'}), 400
     
-
-    if request.method == 'GET':
-        profile = db.profiles.find_one({"name": "Alvin"})
-        print(profile)
-        
-        if profile:
-            # Convert the MongoDB document to a dictionary and return it as JSON
-            profile['_id'] = str(profile['_id'])
-            return jsonify(profile)
-        else:
-            # If no profile is found, return a 404 response
-            return "Profile not found", 404
-@app.route('/profile/<int:id>',methods = ['GET'])
+@app.route('/<id>/profile',methods = ['GET'])
 def getprofile(id):
+    id = int(id)
     try:
-        profile = db.profiles.find_one({"id": id})
+        profile = db.profiles.find_one({"uid": id})
         if profile:
             profile['_id'] = str(profile['_id'])
             # Serialize the profile to JSON and return it

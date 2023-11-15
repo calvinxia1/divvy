@@ -1,36 +1,36 @@
 import React,{useState, useEffect} from 'react'
-interface DivyProps {
-  id: number;
-  name: string;
-  description: string,
-  participants: number[];
-  expenses: number[]
-  amount: number;
-
+import {useUser} from "../context/UserContextProvider";
+interface Props {
+  divyId: number;
 }
-
-const Divy = () => {
-  const [userId, setUserId] = useState("");
+interface DivyProps {
+  name: string,
+  description: string,
+  participants: [],
+  expenses: [],
+  total: number
+}
+const Divy = ({divyId}:Props) => {
+  const {userId} = useUser();
   const [data,setData] = useState<DivyProps>({
-    id: 0,
     name: "",
     description:"",
     participants: [],
-    expenses: [],
-    amount: 0,
+    expenses:[],
+    total: 0
   });
   useEffect(() => {
-    fetch("") // Use the correct URL path use back tick when using variables in path
+    fetch(`/divys/${divyId}`) // Use the correct URL path use back tick when using variables in path
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
-        console.error("Error fetching data: ", error);
+        console.error("Error fetching divy data: ", error);
         // Handle the error here, e.g., display an error message to the user
       });
-  }, []);
+  }, [divyId]);
   return (
-    <div>
-
+    <div className='divy'>
+      <h1>{data.name}</h1>
     </div>
   )
 }
