@@ -1,7 +1,27 @@
 from api import app, db
 from flask import Flask, jsonify, request
+@app.route('/<uid>/friendrequests', methods = ['GET','POST'])
+def friendrequestinfo(uid):
+    uid = int(uid)
+    if request.method == 'POST':
+        data = request.get_json()
+        recipient = data.get('recipient')
+        new_friend_request = {
+            'sender': uid,
+            'recipient': recipient
+        }
+        result = db.friendrequest.insert_one(new_friend_request)
+        if result.acknowledged:
+            return jsonify({'message': 'Friend Request created successfully'})
+        else:
+            return jsonify({'message': 'Failed to create Friend Request'}, 500)
+    if request.method == 'GET':
+        friend_request = list(db.friendrequest.find())
+
+        return jsonify(friend_request)
+    
 @app.route('/divys/<divyId>', methods=['GET'])
-def getdivyinfo(divyId):
+def divyinfo(divyId):
     divyId = int(divyId)
     if request.method == 'GET':
             divy = db.divys.find_one({'did': divyId}, projection=['name','description', 'participants','expenses', 'total'])
@@ -20,7 +40,7 @@ def getdivyinfo(divyId):
 
 
 @app.route('/<uid>/divys', methods=['GET','POST'])
-def getdivy(uid):
+def divy(uid):
     uid = int(uid)
     if request.method == 'POST':
         data = request.get_json()
@@ -52,6 +72,14 @@ def getdivy(uid):
             my_divys = [divy['did'] for divy in user_divys]
 
             return jsonify(my_divys)
+@app.route('/<uid>/friends', methods=['GET'])
+def friend(uid):
+    uid = int(uid)
+    if request.method == 'GET':
+            curr_user = db.profiles.find({'uid': uid})
+            my_friends = list(curr_user['friends'])
+
+            return jsonify(my_friends)
 
 
 @app.route('/login', methods=['POST'])

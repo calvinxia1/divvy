@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import '../styles/Login.css';
+import '../page-styles/LoginPage.css';
 import {useUser} from "../context/UserContextProvider";
 
-const Login = () => {
+const LoginPage = () => {
   const {setUserId} = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -91,4 +91,4 @@ const Login = () => {
   );
 } 
 
-export default Login
+export default LoginPage

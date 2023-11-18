@@ -3,7 +3,7 @@ import {useUser} from "../context/UserContextProvider";
 interface Props {
   divyId: number;
 }
-interface DivyProps {
+export interface DivyProps {
   name: string,
   description: string,
   participants: [],
@@ -12,6 +12,7 @@ interface DivyProps {
 }
 const Divy = ({divyId}:Props) => {
   const {userId} = useUser();
+  const [down, setDown] = useState(false);
   const [data,setData] = useState<DivyProps>({
     name: "",
     description:"",
@@ -19,6 +20,11 @@ const Divy = ({divyId}:Props) => {
     expenses:[],
     total: 0
   });
+
+  const toggleDivy = () => {
+    setDown(!down);
+  }
+  
   useEffect(() => {
     fetch(`/divys/${divyId}`) // Use the correct URL path use back tick when using variables in path
       .then((response) => response.json())
@@ -30,7 +36,13 @@ const Divy = ({divyId}:Props) => {
   }, [divyId]);
   return (
     <div className='divy'>
+      
+
       <h1>{data.name}</h1>
+      {down && (
+        <p>down</p>
+      )
+      }
     </div>
   )
 }
