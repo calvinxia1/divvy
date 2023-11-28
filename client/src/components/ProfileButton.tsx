@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useRef} from "react";
-import "../styles/ProfileButton.css"
+import "../component-styles/ProfileButton.css"
 import dara from "../img/dara.jpg" 
 import ProfileOptions from "./ProfileOptions";
 

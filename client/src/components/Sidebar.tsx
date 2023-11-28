@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import '../styles/Sidebar.css'
+import '../component-styles/Sidebar.css'
 interface Props {
   pages: string[];
   onSelectItem: (page:string) => void;

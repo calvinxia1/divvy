@@ -1,5 +1,5 @@
 import React from 'react'
-import "../styles/Logo.css"
+import "../component-styles/Logo.css"
 import stressnet from "../img/stressvision.png"
 
 

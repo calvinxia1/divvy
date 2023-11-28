@@ -4,7 +4,7 @@ import DivyPage from "./pages/DivyPage";
 import LoginPage from "./pages/LoginPage";
 import { UserContextProvider } from "./context/UserContextProvider";
 import CreateDivyPage from "./pages/CreateDivyPage";
-
+import FriendRequestPage from "./pages/FriendRequestPage";
 function App() {
   return (
     <UserContextProvider>
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path = '/homepage/divys' element = {<DivyPage/>}/>
           {/*<Route path = 'homepage/transactions' element = {<TransactionPage/>}*/}
-          {/*<Route path = 'homepage/friendrequests' element = {<FriendRequestPage/>}*/}
+          <Route path = 'homepage/friendrequests' element = {<FriendRequestPage/>}/>
           <Route path = '/login' element = {<LoginPage/>}/>
           <Route path = '/create/divy' element = {<CreateDivyPage/>}/>
         </Routes>

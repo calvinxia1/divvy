@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useRef} from 'react'
 import {useUser} from "../context/UserContextProvider";
 interface Props {
   divyId: number;
@@ -11,7 +11,6 @@ export interface DivyProps {
   total: number
 }
 const Divy = ({divyId}:Props) => {
-  const {userId} = useUser();
   const [down, setDown] = useState(false);
   const [data,setData] = useState<DivyProps>({
     name: "",
@@ -20,11 +19,17 @@ const Divy = ({divyId}:Props) => {
     expenses:[],
     total: 0
   });
+  
+  const divyRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDivy = () => {
     setDown(!down);
   }
-  
+  const handleClickOutside = (event:MouseEvent) => {
+    if (divyRef.current && !divyRef.current.contains(event.target as Node)) {
+      setDown(false);
+    }
+  };
   useEffect(() => {
     fetch(`/divys/${divyId}`) // Use the correct URL path use back tick when using variables in path
       .then((response) => response.json())
@@ -34,8 +39,14 @@ const Divy = ({divyId}:Props) => {
         // Handle the error here, e.g., display an error message to the user
       });
   }, [divyId]);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, []);
   return (
-    <div className='divy'>
+    <div ref={divyRef} className='divy'>
       
 
       <h1>{data.name}</h1>

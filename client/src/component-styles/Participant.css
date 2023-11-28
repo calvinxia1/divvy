@@ -1,0 +1,4 @@
+.participant{
+    display:flex;
+    flex-direction: row;
+}

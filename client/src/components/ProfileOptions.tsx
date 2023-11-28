@@ -1,5 +1,5 @@
   import { Fragment, useState } from "react";
-  import "../styles/ProfileOptions.css"
+  import "../component-styles/ProfileOptions.css"
   interface Props {
       items: string[];
       clickSelectItem: (item: string) => void;

@@ -3,3 +3,8 @@
     flex-direction: column;
     align-items: center;
 }
+.participant-wrapper {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
